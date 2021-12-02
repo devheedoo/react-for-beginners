@@ -13,9 +13,21 @@
 
     <script type="text/babel">
       function App() {
-        const [minutes, setMinutes] = React.useState();
-        const handleChange = (e) => setMinutes(e.target.value);
-        const reset = () => setMinutes(0);
+        const [amount, setAmount] = React.useState(0);
+        const [flipped, setFlipped] = React.useState(false);
+
+        const handleChange = (e) => setAmount(e.target.value);
+        const handleReset = () => setMinutes(0);
+        const handleFlip = () => {
+          if (flipped) {
+            // 시간 -> 분
+            setAmount((amount) => amount * 60);
+          } else {
+            // 분 -> 시간
+            setAmount((amount) => amount / 60);
+          }
+          setFlipped((curr) => !curr);
+        };
 
         return (
           <div>
@@ -25,7 +37,8 @@
                 id="minutes"
                 placeholder="minutes"
                 type="number"
-                value={minutes}
+                disabled={flipped}
+                value={flipped ? amount * 60 : amount}
                 onChange={handleChange}
               />
             </div>
@@ -35,11 +48,13 @@
                 id="hours"
                 placeholder="hours"
                 type="number"
-                disabled
-                value={(minutes / 60).toFixed(1)}
+                disabled={!flipped}
+                value={flipped ? amount : amount / 60}
+                onChange={handleChange}
               />
             </div>
-            <button onClick={reset}>Reset</button>
+            <button onClick={handleReset}>Reset</button>
+            <button onClick={handleFlip}>Flip</button>
           </div>
         );
       }
