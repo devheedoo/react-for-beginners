@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Time Converter</title>
+</head>
+<body>
+	<div id="root"></div>
+
+	<script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+	<script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+	<script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
+
+	<script type="text/babel">
+		function App() {
+			const [minutes, setMinutes] = React.useState();
+			const handleChange = (e) => {
+				setMinutes(e.target.value);
+			}
+			return (
+				<div>
+					<label htmlFor="minutes">Minutes</label>
+					<input id="minutes" placeholder="minutes" type="number"
+						value={minutes} onChange={handleChange} />
+					<label htmlFor="hours">Minutes</label>
+					<input id="hours" placeholder="hours" type="number" />
+				</div>
+			);
+		}
+		const root = document.getElementById('root');
+		ReactDOM.render(<App />, root);
+	</script>
+</body>
+</html>
