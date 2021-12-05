@@ -17,7 +17,7 @@
         const [flipped, setFlipped] = React.useState(false);
 
         const handleChange = (e) => setAmount(e.target.value);
-        const handleReset = () => setMinutes(0);
+        const handleReset = () => setAmount(0);
         const handleFlip = () => {
           if (flipped) {
             // 시간 -> 분
