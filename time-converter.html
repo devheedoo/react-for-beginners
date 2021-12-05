@@ -18,7 +18,7 @@
 
         const handleChange = (e) => setAmount(e.target.value);
         const handleReset = () => setAmount(0);
-        const handleFlip = () => {
+        const handleInvert = () => {
           if (inverted) {
             // 시간 -> 분
             setAmount((amount) => amount * 60);
@@ -31,6 +31,7 @@
 
         return (
           <div>
+            <h1>Time Converter</h1>
             <div>
               <label htmlFor="minutes">Minutes</label>
               <input
@@ -54,7 +55,9 @@
               />
             </div>
             <button onClick={handleReset}>Reset</button>
-            <button onClick={handleFlip}>Flip</button>
+            <button onClick={handleInvert}>
+              {inverted ? 'Turn back' : 'Invert'}
+            </button>
           </div>
         );
       }
