@@ -14,7 +14,7 @@
 	<script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
 
 	<script type="text/babel">
-		function Button({ text, onClick }) {
+		function Button({ text, onClick, fontSize = 12 }) {
 			console.log(text, 'was rendered');
 			return (
 				<button
@@ -25,6 +25,7 @@
 						padding: '10px 20px',
 						border: 0,
 						borderRadius: 10,
+						fontSize,
 					}}>
 					{text}
 				</button>
@@ -33,12 +34,18 @@
 
 		const MemorizedButton = React.memo(Button);
 
+		Button.propTypes = {
+			text: PropTypes.string.isRequired,
+			onClick: PropTypes.func,
+			fontSize: PropTypes.number,
+		}
+
 		function App() {
 			const [buttonText, setButtonText] = React.useState('Save changes');
 			const handleClick = () => setButtonText('Revert changes');
 			return (
 				<div>
-					<MemorizedButton text={buttonText} onClick={handleClick} />
+					<MemorizedButton text={buttonText} onClick={handleClick} fontSize={18} />
 					<MemorizedButton text="Confirm" />
 				</div>
 			);
