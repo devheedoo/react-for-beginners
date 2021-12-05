@@ -13,16 +13,17 @@
 	<script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
 
 	<script type="text/babel">
-		function Button({ text, big }) {
+		function Button({ text, onClick }) {
+			console.log(text, 'was rendered');
 			return (
 				<button
+					onClick={onClick}
 					style={{
 						backgroundColor: 'tomato',
 						color: 'white',
 						padding: '10px 20px',
 						border: 0,
 						borderRadius: 10,
-						fontSize: big ? 18 : 12,
 					}}>
 					{text}
 				</button>
@@ -30,9 +31,11 @@
 		}
 
 		function App() {
+			const [buttonText, setButtonText] = React.useState('Save changes');
+			const handleClick = () => setButtonText('Revert changes');
 			return (
 				<div>
-					<Button text="Save changes" big />
+					<Button text={buttonText} onClick={handleClick} />
 					<Button text="Confirm" />
 				</div>
 			);
