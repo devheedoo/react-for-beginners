@@ -61,6 +61,54 @@
 			);
 		}
 
+		function KmToMiles() {
+			const [amount, setAmount] = React.useState(0);
+			const [inverted, setInverted] = React.useState(false);
+			const handleChange = (e) => setAmount(e.target.value);
+			const handleReset = () => setAmount(0);
+			const handleInvert = () => {
+				if (inverted) {
+					// Miles -> KM
+					setAmount((amount) => amount * 1.6);
+				} else {
+					// KM -> Miles
+					setAmount((amount) => amount / 1.6);
+				}
+				setInverted((curr) => !curr);
+			};
+
+			return (
+				<div>
+					<div>
+						<label htmlFor="km">KM</label>
+						<input
+							id="km"
+							placeholder="KM"
+							type="number"
+							disabled={inverted}
+							value={inverted ? amount * 1.6 : amount}
+							onChange={handleChange}
+						/>
+					</div>
+					<div>
+						<label htmlFor="miles">Miles</label>
+						<input
+							id="miles"
+							placeholder="Miles"
+							type="number"
+							disabled={!inverted}
+							value={inverted ? amount : amount / 1.6}
+							onChange={handleChange}
+						/>
+					</div>
+					<button onClick={handleReset}>Reset</button>
+					<button onClick={handleInvert}>
+						{inverted ? 'Turn back' : 'Invert'}
+					</button>
+				</div>
+			);
+		}
+
 		const OPTIONS = {
 			SELECT: 'select',
 			MINUTES_TO_HOURS: 'minutes_to_hours',
@@ -83,7 +131,7 @@
 					<hr />
 					{option === OPTIONS.SELECT ? "Please select an option" : null}
 					{option === OPTIONS.MINUTES_TO_HOURS ? <MinutesToHours /> : null}
-					{option === OPTIONS.KM_TO_MILES ? null : null}
+					{option === OPTIONS.KM_TO_MILES ? <KmToMiles /> : null}
 				</div>
 			);
 		}
