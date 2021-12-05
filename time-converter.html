@@ -14,19 +14,19 @@
     <script type="text/babel">
       function App() {
         const [amount, setAmount] = React.useState(0);
-        const [flipped, setFlipped] = React.useState(false);
+        const [inverted, setInverted] = React.useState(false);
 
         const handleChange = (e) => setAmount(e.target.value);
         const handleReset = () => setAmount(0);
         const handleFlip = () => {
-          if (flipped) {
+          if (inverted) {
             // 시간 -> 분
             setAmount((amount) => amount * 60);
           } else {
             // 분 -> 시간
             setAmount((amount) => amount / 60);
           }
-          setFlipped((curr) => !curr);
+          setInverted((curr) => !curr);
         };
 
         return (
@@ -37,8 +37,8 @@
                 id="minutes"
                 placeholder="minutes"
                 type="number"
-                disabled={flipped}
-                value={flipped ? amount * 60 : amount}
+                disabled={inverted}
+                value={inverted ? amount * 60 : amount}
                 onChange={handleChange}
               />
             </div>
@@ -48,8 +48,8 @@
                 id="hours"
                 placeholder="hours"
                 type="number"
-                disabled={!flipped}
-                value={flipped ? amount : amount / 60}
+                disabled={!inverted}
+                value={inverted ? amount : amount / 60}
                 onChange={handleChange}
               />
             </div>
